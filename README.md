@@ -5,6 +5,12 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![GSAP](https://img.shields.io/badge/GSAP-88CE02?style=for-the-badge&logo=greensock&logoColor=white)
 
+<br/>
+<p align="center">
+  <img src="./screenshot.png" alt="Lunar Odyssey Interface Screenshot" width="100%">
+</p>
+<br/>
+
 *The unseen and dark side are waiting for you. It's time to test your limits.*
 
 **Lunar Odyssey** is an ultra-premium, dark-themed web experience designed to evoke the awe, scale, and mystery of deep space exploration. Built with performance and aesthetics in mind, the site leverages cutting-edge web technologies to deliver a cinematic user experience.
