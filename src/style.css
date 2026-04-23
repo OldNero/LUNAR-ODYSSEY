@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+@theme {
+  --color-neon: #ccff00;
+  --color-neon-hover: #e5ff4d;
+  --color-dark: #0a0a0a;
+  --color-darker: #050505;
+  --color-card: #141414;
+  --color-gray-light: #a3a3a3;
+  --color-gray-dark: #404040;
+  
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+}
+
+body {
+  background-color: var(--color-dark);
+  color: white;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+}
+
+.text-neon {
+  color: var(--color-neon);
+}
+
+.bg-neon {
+  background-color: var(--color-neon);
+}
+
+.border-neon {
+  border-color: var(--color-neon);
+}
+
+.hover\:bg-neon-hover:hover {
+  background-color: var(--color-neon-hover);
+}
+
+/* Custom Utilities for the Grid / Borders */
+.border-grid {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.glass-panel {
+  background: rgba(20, 20, 20, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
