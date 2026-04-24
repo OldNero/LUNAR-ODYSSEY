@@ -5,8 +5,58 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Dynamic Lunar Logo Setup
+  const setupDynamicLogo = () => {
+    const LUNAR_MONTH = 29.53058867;
+    const knownNewMoon = new Date("2000-01-06T18:14:00Z");
+    const now = new Date();
+    const days = (now - knownNewMoon) / (1000 * 60 * 60 * 24);
+    const phase = (days % LUNAR_MONTH) / LUNAR_MONTH; // 0.0 to 1.0
+    // We have 7 states in the sprite
+    const phaseIndex = Math.floor(phase * 7) % 7;
+    
+    const logoDiv = document.getElementById("dynamic-logo");
+    if (logoDiv) {
+      logoDiv.style.backgroundPosition = `${(100 / 6) * phaseIndex}% 0%`;
+      logoDiv.title = `Lunar Phase: ${Math.round(phase * 100)}%`;
+    }
+  };
+  setupDynamicLogo();
+
+  // Temporarily disable scroll
+  document.body.style.overflow = "hidden";
+
+  // 0. Loader Animation
+  const loaderTl = gsap.timeline({
+    onComplete: () => {
+      document.getElementById("loader").style.display = "none";
+      document.body.style.overflow = "auto";
+    }
+  });
+
+  loaderTl.to("#loader-progress", {
+    width: "100%",
+    duration: 1.5,
+    ease: "power2.inOut",
+    onUpdate: function() {
+      const progress = Math.round(this.progress() * 100);
+      document.getElementById("loader-percentage").innerText = progress + "%";
+      if(progress > 40 && progress < 70) {
+        document.getElementById("loader-text").innerText = "Decrypting Vanguard Logs...";
+      } else if (progress >= 70) {
+        document.getElementById("loader-text").innerText = "System Ready.";
+      }
+    }
+  })
+  .to("#loader", {
+    yPercent: -100,
+    opacity: 0,
+    duration: 0.8,
+    ease: "power3.inOut"
+  }, "+=0.2");
+
   // 1. Initial Load Animations (Navbar & Hero)
-  const heroTl = gsap.timeline();
+  const heroTl = gsap.timeline({ delay: 2 });
   
   // Navbar
   heroTl.from("nav", {
@@ -123,21 +173,45 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-  // 6. CTA Section
-  const ctaTl = gsap.timeline({
+  // 6. Testimonials Section
+  const testimonialsTl = gsap.timeline({
     scrollTrigger: {
       trigger: "section:nth-of-type(6)",
       start: "top 75%",
     }
   });
 
-  ctaTl.from("section:nth-of-type(6) h2", {
+  testimonialsTl.from("section:nth-of-type(6) .mb-20 > *", {
+    y: 30,
+    opacity: 0,
+    duration: 0.8,
+    stagger: 0.2,
+    ease: "power3.out"
+  })
+  .from("section:nth-of-type(6) .grid-cols-1 > div", {
+    y: 50,
+    opacity: 0,
+    duration: 0.8,
+    stagger: 0.2,
+    ease: "power3.out"
+  }, "-=0.4");
+
+
+  // 7. CTA Section
+  const ctaTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: "section:nth-of-type(7)",
+      start: "top 75%",
+    }
+  });
+
+  ctaTl.from("section:nth-of-type(7) h2", {
     y: 50,
     opacity: 0,
     duration: 1,
     ease: "power3.out"
   })
-  .from("section:nth-of-type(6) .flex-col > *", {
+  .from("section:nth-of-type(7) .flex-col > *", {
     x: 50,
     opacity: 0,
     duration: 0.8,
@@ -146,22 +220,22 @@ document.addEventListener("DOMContentLoaded", () => {
   }, "-=0.6");
 
 
-  // 7. Vessels & Destinations
+  // 8. Vessels & Destinations
   const vesselsTl = gsap.timeline({
     scrollTrigger: {
-      trigger: "section:nth-of-type(7)",
+      trigger: "section:nth-of-type(8)",
       start: "top 75%",
     }
   });
 
-  vesselsTl.from("section:nth-of-type(7) .mb-20 > *", {
+  vesselsTl.from("section:nth-of-type(8) .mb-20 > *", {
     y: 30,
     opacity: 0,
     duration: 0.8,
     stagger: 0.2,
     ease: "power3.out"
   })
-  .from("section:nth-of-type(7) .grid-cols-1 > div", {
+  .from("section:nth-of-type(8) .grid-cols-1 > div", {
     y: 50,
     opacity: 0,
     duration: 0.8,
