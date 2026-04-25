@@ -268,4 +268,44 @@ document.addEventListener("DOMContentLoaded", () => {
     y: -50,
     ease: "none"
   });
+
+  // 9. Seamless Video Loop Controller
+  const initSeamlessLoop = () => {
+    const v1 = document.getElementById("hero-video-1");
+    const v2 = document.getElementById("hero-video-2");
+    if (!v1 || !v2) return;
+
+    let activeVideo = v1;
+    let nextVideo = v2;
+    const fadeDuration = 0.8; // seconds
+
+    const handleLoop = () => {
+      // Check if current video is near end
+      const timeLeft = activeVideo.duration - activeVideo.currentTime;
+      
+      if (timeLeft <= fadeDuration && nextVideo.paused) {
+        // Start next video
+        nextVideo.currentTime = 0;
+        nextVideo.play();
+        
+        // Cross-fade
+        gsap.to(activeVideo, { opacity: 0, duration: fadeDuration, ease: "none" });
+        gsap.to(nextVideo, { opacity: 1, duration: fadeDuration, ease: "none" });
+        
+        // Swap references
+        [activeVideo, nextVideo] = [nextVideo, activeVideo];
+      }
+      
+      requestAnimationFrame(handleLoop);
+    };
+
+    // Ensure metadata is loaded to get duration
+    v1.addEventListener("loadedmetadata", () => {
+      requestAnimationFrame(handleLoop);
+    });
+    
+    // Fallback if metadata already loaded
+    if (v1.duration) requestAnimationFrame(handleLoop);
+  };
+  initSeamlessLoop();
 });

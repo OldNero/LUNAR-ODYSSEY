@@ -58,7 +58,8 @@
     <!-- Hero Section -->
     <section class="relative min-h-screen flex items-center pt-20">
       <div class="absolute inset-0 z-0 overflow-hidden">
-        <video src="/src/assets/moon-spin.mp4" autoplay loop muted playsinline class="absolute right-[-5%] top-1/2 -translate-y-1/2 w-[60%] lg:w-[50%] h-auto object-contain opacity-100"></video>
+        <video id="hero-video-1" src="/src/assets/moon-spin.mp4" autoplay muted playsinline class="hero-video absolute right-[-5%] top-1/2 -translate-y-1/2 w-[60%] lg:w-[50%] h-auto object-contain opacity-100 z-10"></video>
+        <video id="hero-video-2" src="/src/assets/moon-spin.mp4" muted playsinline class="hero-video absolute right-[-5%] top-1/2 -translate-y-1/2 w-[60%] lg:w-[50%] h-auto object-contain opacity-0 z-0"></video>
         <div class="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/40 to-transparent pointer-events-none"></div>
         <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#050505] pointer-events-none"></div>
       </div>
@@ -371,44 +372,125 @@
     </section>
 
     <!-- Footer -->
-    <footer class="relative overflow-hidden mt-20 border-t border-white/5 pt-20 pb-10">
-      <div class="absolute bottom-0 left-0 right-0 h-[400px] z-0">
-         <img src="/images/lunar_horizon.png" alt="Moon Texture" class="w-full h-full object-cover object-bottom opacity-10 mix-blend-screen" />
-         <div class="absolute inset-0 bg-gradient-to-t from-[#050505] to-transparent"></div>
+    <footer class="relative overflow-hidden mt-32 border-t border-white/5 pt-32 pb-12 bg-black">
+      <!-- Background Text Overlay -->
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full text-center pointer-events-none select-none opacity-[0.02]">
+        <h2 class="text-[25vw] font-display font-black leading-none uppercase">Lunar</h2>
+      </div>
+
+      <!-- Lunar Horizon Image -->
+      <div class="absolute bottom-0 left-0 right-0 h-[600px] z-0 pointer-events-none">
+         <img src="/images/lunar_horizon.png" alt="Moon Texture" class="w-full h-full object-cover object-bottom opacity-20 mix-blend-screen" />
+         <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent"></div>
       </div>
       
-      <div class="max-w-[1600px] mx-auto px-6 relative z-10 grid grid-cols-1 md:grid-cols-4 gap-12">
-        <div class="col-span-1 md:col-span-2">
-          <h2 class="text-white text-3xl font-display font-bold uppercase tracking-tight mb-4">Lunar Odyssey</h2>
-          <p class="text-white/40 text-xs max-w-xs leading-relaxed">
-            Leading the push to the next frontier. Bringing luxury and advanced technology to lunar exploration.
-          </p>
+      <div class="max-w-[1600px] mx-auto px-6 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+          <!-- Brand & Comms Column -->
+          <div class="lg:col-span-4">
+            <div class="flex items-center gap-4 mb-8">
+              <div class="h-6 w-6 bg-no-repeat" style="background-image: url('/images/logo.svg'); background-size: 700% 100%; background-position: 0% 0%;"></div>
+              <h2 class="text-white text-2xl font-display font-bold uppercase tracking-tight">Lunar Odyssey</h2>
+            </div>
+            <p class="text-white/40 text-sm leading-relaxed mb-12 max-w-sm">
+              Pushing the boundaries of human presence. Leading the orbital and surface mapping initiatives for the next generation of explorers.
+            </p>
+            
+            <div class="space-y-6">
+              <div class="text-[#ccff00] text-[10px] uppercase tracking-widest font-bold">Secure Comms Link</div>
+              <form class="relative group max-w-sm">
+                <input type="email" placeholder="ENTER COORDS (EMAIL)" class="w-full bg-white/5 border border-white/10 px-4 py-4 text-xs text-white placeholder:text-white/20 focus:outline-none focus:border-[#ccff00] transition-colors" />
+                <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 text-[#ccff00] hover:text-white transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"/>
+                  </svg>
+                </button>
+              </form>
+              <div class="text-[9px] text-white/20 uppercase tracking-widest flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#ccff00] animate-pulse"></span>
+                Link Encrypted via RSA-4096
+              </div>
+            </div>
+          </div>
+
+          <!-- Nav Links Grid -->
+          <div class="lg:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-12">
+            <div>
+              <div class="text-white/30 text-[10px] uppercase tracking-widest font-bold mb-8 flex items-center gap-2">
+                <span class="text-[#ccff00]">/</span> Fleet & Ops
+              </div>
+              <ul class="space-y-4 text-[11px] text-white/60 uppercase tracking-widest">
+                <li><a href="#" class="hover:text-[#ccff00] transition-colors">Ion-7 Fleet</a></li>
+                <li><a href="#" class="hover:text-[#ccff00] transition-colors">Shadow Outpost</a></li>
+                <li><a href="#" class="hover:text-[#ccff00] transition-colors">Orbital Gates</a></li>
+                <li><a href="#" class="hover:text-[#ccff00] transition-colors">Cargo Log</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <div class="text-white/30 text-[10px] uppercase tracking-widest font-bold mb-8 flex items-center gap-2">
+                <span class="text-[#ccff00]">/</span> Research
+              </div>
+              <ul class="space-y-4 text-[11px] text-white/60 uppercase tracking-widest">
+                <li><a href="#" class="hover:text-[#ccff00] transition-colors">Topography</a></li>
+                <li><a href="#" class="hover:text-[#ccff00] transition-colors">Mineralogy</a></li>
+                <li><a href="#" class="hover:text-[#ccff00] transition-colors">Visual Archive</a></li>
+                <li><a href="#" class="hover:text-[#ccff00] transition-colors">White Papers</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <div class="text-white/30 text-[10px] uppercase tracking-widest font-bold mb-8 flex items-center gap-2">
+                <span class="text-[#ccff00]">/</span> Company
+              </div>
+              <ul class="space-y-4 text-[11px] text-white/60 uppercase tracking-widest">
+                <li><a href="#" class="hover:text-[#ccff00] transition-colors">Our Vision</a></li>
+                <li><a href="#" class="hover:text-[#ccff00] transition-colors">Press Kit</a></li>
+                <li><a href="#" class="hover:text-[#ccff00] transition-colors">Careers</a></li>
+                <li><a href="#" class="hover:text-[#ccff00] transition-colors">Logistics</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <div class="text-white/30 text-[10px] uppercase tracking-widest font-bold mb-8 flex items-center gap-2">
+                <span class="text-[#ccff00]">/</span> Support
+              </div>
+              <ul class="space-y-4 text-[11px] text-white/60 uppercase tracking-widest">
+                <li><a href="#" class="hover:text-[#ccff00] transition-colors">Help Center</a></li>
+                <li><a href="#" class="hover:text-[#ccff00] transition-colors">Comms Test</a></li>
+                <li><a href="#" class="hover:text-[#ccff00] transition-colors">Terminal Access</a></li>
+                <li><a href="#" class="hover:text-[#ccff00] transition-colors">Status API</a></li>
+              </ul>
+            </div>
+          </div>
         </div>
-        
-        <div>
-          <div class="text-[#ccff00] text-[10px] uppercase tracking-widest font-bold mb-6">Explore</div>
-          <ul class="space-y-3 text-xs text-white/60">
-            <li><a href="#" class="hover:text-white transition-colors">Missions</a></li>
-            <li><a href="#" class="hover:text-white transition-colors">Destinations</a></li>
-            <li><a href="#" class="hover:text-white transition-colors">Vessels</a></li>
-          </ul>
-        </div>
-        
-        <div>
-           <div class="text-[#ccff00] text-[10px] uppercase tracking-widest font-bold mb-6">Connect</div>
-           <ul class="space-y-3 text-xs text-white/60">
-             <li><a href="#" class="hover:text-white transition-colors">Comms Link</a></li>
-             <li><a href="#" class="hover:text-white transition-colors">Career</a></li>
-             <li><a href="#" class="hover:text-white transition-colors">Press</a></li>
-           </ul>
-        </div>
-      </div>
-      
-      <div class="max-w-[1600px] mx-auto px-6 relative z-10 mt-24 flex flex-col md:flex-row justify-between items-center text-[10px] text-white/30 uppercase tracking-widest border-t border-white/5 pt-8">
-        <div>&copy; 2026 Lunar Odyssey. All Rights Reserved.</div>
-        <div class="flex gap-6 mt-4 md:mt-0">
-          <a href="#" class="hover:text-white">Privacy</a>
-          <a href="#" class="hover:text-white">Terms</a>
+
+        <!-- System Status Bar -->
+        <div class="mt-32 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
+          <div class="flex flex-wrap justify-center md:justify-start gap-x-12 gap-y-4">
+            <div class="flex flex-col gap-1">
+              <span class="text-[9px] text-white/20 uppercase tracking-widest">System Status</span>
+              <span class="text-[10px] text-[#ccff00] uppercase tracking-widest font-mono">Nominal / 102.4ms Latency</span>
+            </div>
+            <div class="flex flex-col gap-1">
+              <span class="text-[9px] text-white/20 uppercase tracking-widest">Active Nodes</span>
+              <span class="text-[10px] text-white uppercase tracking-widest font-mono">14 Gateway Hubs</span>
+            </div>
+            <div class="flex flex-col gap-1">
+              <span class="text-[9px] text-white/20 uppercase tracking-widest">Location</span>
+              <span class="text-[10px] text-white uppercase tracking-widest font-mono">Orbital Grid 07</span>
+            </div>
+          </div>
+          
+          <div class="flex items-center gap-12">
+            <div class="flex gap-6 text-[10px] text-white/30 uppercase tracking-widest">
+              <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+              <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+            </div>
+            <div class="text-[10px] text-white/20 uppercase tracking-widest font-mono">
+              &copy; 2026 LNR-ODSY.V2
+            </div>
+          </div>
         </div>
       </div>
     </footer>
